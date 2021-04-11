@@ -1,0 +1,13 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-04-01T18:43:05+02:00
+
+====== First Level ======
+Created Donnerstag 01 April 2021
+
+Stony Dungeon
+
+Center Start area, with Portal that needs to be activated
+
+Branches out in to 3-5 Seal rooms and one Trader room
+And Battle Rooms before them

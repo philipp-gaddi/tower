@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/startmenuoptionsresource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+locale = "en"
+resolutions = [ "1280x720", "1920x1080", "1920x1200" ]
+resolution_selected = 0
+fullscreen = false

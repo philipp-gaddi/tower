@@ -1,0 +1,22 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-03-29T15:19:43+02:00
+
+====== Assets ======
+Created Montag 29 März 2021
+
+Need templates for each asset type
+
+Character sheets
+* left right pictures
+* walking
+
+5 level sheets
+
+God
+Boss 1 - 5
+Humans
+
+Music?
+
+

@@ -1,0 +1,269 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://startmenu/startmenu.gd" type="Script" id=1]
+[ext_resource path="res://theme/tower_theme.tres" type="Theme" id=2]
+[ext_resource path="res://theme/dejavu_ttf/DejaVuSans.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 27
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="StartMenu" type="Control"]
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 56.7194
+margin_top = 47.6652
+margin_right = 333.719
+margin_bottom = 646.665
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_right = 277.0
+margin_bottom = 599.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="Menu" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 256.0
+margin_bottom = 578.0
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/Menu"]
+margin_right = 236.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 1 )
+text = "TITLE_TXT"
+align = 1
+
+[node name="Seperator" type="ReferenceRect" parent="PanelContainer/MarginContainer/Menu"]
+margin_top = 53.0
+margin_right = 236.0
+margin_bottom = 103.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Start" type="Button" parent="PanelContainer/MarginContainer/Menu"]
+margin_top = 123.0
+margin_right = 236.0
+margin_bottom = 135.0
+focus_neighbour_top = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../Options")
+text = "START_TXT"
+
+[node name="Options" type="Button" parent="PanelContainer/MarginContainer/Menu"]
+margin_top = 155.0
+margin_right = 236.0
+margin_bottom = 167.0
+focus_neighbour_top = NodePath("../Start")
+focus_neighbour_bottom = NodePath("../Quit")
+text = "OPTIONS_TXT"
+
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/Menu"]
+margin_top = 187.0
+margin_right = 236.0
+margin_bottom = 199.0
+focus_neighbour_top = NodePath("../Options")
+focus_neighbour_bottom = NodePath("../Start")
+text = "QUIT_TXT"
+
+[node name="Seperator2" type="ReferenceRect" parent="PanelContainer/MarginContainer/Menu"]
+margin_top = 219.0
+margin_right = 236.0
+margin_bottom = 469.0
+rect_min_size = Vector2( 0, 250 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/Menu"]
+margin_top = 489.0
+margin_right = 236.0
+margin_bottom = 491.0
+text = "COPYRIGHT_TXT"
+
+[node name="OptionsScreen" type="PanelContainer" parent="."]
+margin_left = 345.719
+margin_top = 47.6652
+margin_right = 1094.72
+margin_bottom = 646.665
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="OptionsScreen"]
+margin_right = 749.001
+margin_bottom = 599.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsScreen/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 729.0
+margin_bottom = 578.0
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Language" type="HBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer"]
+margin_right = 709.0
+margin_bottom = 22.0
+
+[node name="LanguageLabel" type="Label" parent="OptionsScreen/MarginContainer/VBoxContainer/Language"]
+margin_top = 10.0
+margin_right = 250.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_vertical = 6
+text = "LANGUAGE_TXT"
+
+[node name="LanguageOptions" type="OptionButton" parent="OptionsScreen/MarginContainer/VBoxContainer/Language"]
+margin_left = 254.0
+margin_right = 479.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Item 0"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="OptionsScreen/MarginContainer/VBoxContainer/Language"]
+margin_left = 483.0
+margin_right = 709.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="Resolution" type="HBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 709.0
+margin_bottom = 74.0
+
+[node name="ResolutionLabel" type="Label" parent="OptionsScreen/MarginContainer/VBoxContainer/Resolution"]
+margin_top = 10.0
+margin_right = 250.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_vertical = 6
+text = "RESOLUTION_TXT"
+
+[node name="ResolutionOptions" type="OptionButton" parent="OptionsScreen/MarginContainer/VBoxContainer/Resolution"]
+margin_left = 254.0
+margin_right = 479.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "Item 0"
+
+[node name="ReferenceRect" type="ReferenceRect" parent="OptionsScreen/MarginContainer/VBoxContainer/Resolution"]
+margin_left = 483.0
+margin_right = 709.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="Fullscreen" type="HBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 709.0
+margin_bottom = 136.0
+
+[node name="FullscreenLabel" type="Label" parent="OptionsScreen/MarginContainer/VBoxContainer/Fullscreen"]
+margin_top = 15.0
+margin_right = 250.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 250, 0 )
+size_flags_vertical = 6
+text = "FULLSCREEN_TXT"
+
+[node name="FullscreenCheckButton" type="CheckButton" parent="OptionsScreen/MarginContainer/VBoxContainer/Fullscreen"]
+margin_left = 254.0
+margin_right = 318.0
+margin_bottom = 32.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/hover_pressed = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="OptionsScreen/MarginContainer/VBoxContainer/Fullscreen"]
+margin_left = 322.0
+margin_right = 709.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="ReferenceRect" type="ReferenceRect" parent="OptionsScreen/MarginContainer/VBoxContainer"]
+margin_top = 166.0
+margin_right = 709.0
+margin_bottom = 516.0
+size_flags_vertical = 3
+
+[node name="Confirm" type="HBoxContainer" parent="OptionsScreen/MarginContainer/VBoxContainer"]
+margin_top = 546.0
+margin_right = 709.0
+margin_bottom = 558.0
+
+[node name="ReferenceRect" type="ReferenceRect" parent="OptionsScreen/MarginContainer/VBoxContainer/Confirm"]
+margin_right = 267.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.84
+
+[node name="Apply" type="Button" parent="OptionsScreen/MarginContainer/VBoxContainer/Confirm"]
+margin_left = 271.0
+margin_right = 340.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+text = "APPLY_TXT"
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="OptionsScreen/MarginContainer/VBoxContainer/Confirm"]
+margin_left = 344.0
+margin_right = 414.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+
+[node name="Revert" type="Button" parent="OptionsScreen/MarginContainer/VBoxContainer/Confirm"]
+margin_left = 418.0
+margin_right = 488.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+text = "REVERT_TXT"
+
+[node name="ReferenceRect3" type="ReferenceRect" parent="OptionsScreen/MarginContainer/VBoxContainer/Confirm"]
+margin_left = 492.0
+margin_right = 561.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+
+[node name="Reset" type="Button" parent="OptionsScreen/MarginContainer/VBoxContainer/Confirm"]
+margin_left = 565.0
+margin_right = 635.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+text = "RESET_TXT"
+
+[node name="ReferenceRect4" type="ReferenceRect" parent="OptionsScreen/MarginContainer/VBoxContainer/Confirm"]
+margin_left = 639.0
+margin_right = 709.0
+margin_bottom = 12.0
+size_flags_horizontal = 3
+[connection signal="button_up" from="PanelContainer/MarginContainer/Menu/Start" to="." method="_on_Start_button_up"]
+[connection signal="button_up" from="PanelContainer/MarginContainer/Menu/Options" to="." method="_on_Options_button_up"]
+[connection signal="button_up" from="PanelContainer/MarginContainer/Menu/Quit" to="." method="_on_Quit_button_up"]
+[connection signal="item_selected" from="OptionsScreen/MarginContainer/VBoxContainer/Language/LanguageOptions" to="." method="_on_LanguageOptions_item_selected"]
+[connection signal="item_selected" from="OptionsScreen/MarginContainer/VBoxContainer/Resolution/ResolutionOptions" to="." method="_on_ResolutionOptions_item_selected"]
+[connection signal="toggled" from="OptionsScreen/MarginContainer/VBoxContainer/Fullscreen/FullscreenCheckButton" to="." method="_on_FullscreenCheckButton_toggled"]
+[connection signal="button_up" from="OptionsScreen/MarginContainer/VBoxContainer/Confirm/Apply" to="." method="_on_Apply_button_up"]
+[connection signal="button_up" from="OptionsScreen/MarginContainer/VBoxContainer/Confirm/Revert" to="." method="_on_Revert_button_up"]
+[connection signal="button_up" from="OptionsScreen/MarginContainer/VBoxContainer/Confirm/Reset" to="." method="_on_Reset_button_up"]

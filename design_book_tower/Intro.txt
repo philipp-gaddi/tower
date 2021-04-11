@@ -1,0 +1,71 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-03-29T03:54:52+02:00
+
+====== Intro ======
+Created Montag 29 März 2021
+
+The Tower is lite rogue game inspired by the game dungeon souls (ds). Due the bugs, naming mistakes in ds, i thought i could make something similar. not because i believe removing such mistakes, would make it worth, or that i am a super genius that can surpass everyone in their field. nah those mistakes inspired me, somehow i think about them and then i start wanted to make a game, also i believe the game is good.
+
+The theme here will be different, i want to have a steam punk catholicism, i don't know yet what that means but i'm here to explore.
+
+The story is simple. The humans build a second tower high enough to reach God. God wants to destroy the tower but the humans fight back this time. The Tower is  the battlefield of heroes vs Gods army. The player is one of the heroes.
+
+
+
+Visual Style: Steampunk Catholicism
+
+
+
+===== Heroes =====
+the shonen character, lost his friends cuz he's weak.
+atheist, is confused about everything
+vampire hunter, ye god has vampires in his army
+fallen priest, god fights against humans!?
+abel, this time my fire will reach you GOD
+judas, you won't play me again Jesus
+drowned witch, so i'm a witch right cuz i drowned
+
+
+
+
+===== Mechanic =====
+* Level Ups
+* two skills per character
+* mouse aim
+* wasd movement
+* pick up item
+* shoot
+* slash
+* AI attacking on sight
+* crafting material collection
+* crafting gear
+* money
+* level generator, randomizer
+
+
+
+
+
+
+===== Graphic style =====
+
+2D ~~3D?~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
