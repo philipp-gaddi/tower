@@ -4,10 +4,12 @@ var vector_start
 var vector_end
 
 func _ready():
-	vector_start = Vector2(5,6)
-	vector_end = Vector2(10,10)
-	draw_corridor(vector_start, vector_end, 2)
-	
+#	vector_start = Vector2(5,6)
+#	vector_end = Vector2(10,10)
+#	draw_corridor(vector_start, vector_end, 2)
+#
+#	draw_room(Rect2(Vector2(4,4), Vector2(7,7)))
+	pass
 
 
 func draw_corridor(start:Vector2, end:Vector2, half_thickness:int = 3):
@@ -20,20 +22,33 @@ func draw_corridor(start:Vector2, end:Vector2, half_thickness:int = 3):
 		set_cellv(v, 0)
 	
 	# udpate autotile region todo remove this, it's for testing
-	update_bitmask_region(Vector2(-50,-50), Vector2(50,50))
+#	update_bitmask_region(Vector2(-50,-50), Vector2(50,50))
 	
 
-func _input(event):
+
+func draw_room(rect:Rect2):
 	
-	if event.is_action_released("mouse_left"):
+	for i in range(rect.size.x):
 		
-		clear()
-		vector_start = world_to_map(get_global_mouse_position())
-		draw_corridor(vector_start, vector_end, 2)
-	elif event.is_action_released("mouse_right"):
-		clear()
-		vector_end = world_to_map(get_global_mouse_position())
-		draw_corridor(vector_start, vector_end, 2)
+		for j in range(rect.size.y):
+			
+			set_cellv(rect.position + Vector2(i, j), 0)
+	
+#	update_bitmask_region(Vector2(-50,-50), Vector2(50,50))
+
+
+
+#func _input(event):
+#
+#	if event.is_action_released("mouse_left"):
+#
+#		clear()
+#		vector_start = world_to_map(get_global_mouse_position())
+#		draw_corridor(vector_start, vector_end, 2)
+#	elif event.is_action_released("mouse_right"):
+#		clear()
+#		vector_end = world_to_map(get_global_mouse_position())
+#		draw_corridor(vector_start, vector_end, 2)
 
 func bresehnham_algorithmus(start:Vector2, end:Vector2)->PoolVector2Array:
 	
