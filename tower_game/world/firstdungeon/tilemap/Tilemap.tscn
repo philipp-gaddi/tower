@@ -735,7 +735,3 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 48, 64, 48, 16, 0, 16, 0, 0 )
 tile_set = SubResource( 79 )
 format = 1
 script = ExtResource( 2 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 958.984, 539.032 )
-current = true

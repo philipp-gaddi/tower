@@ -85,7 +85,7 @@ func _on_Quit_button_up():
 
 
 func _on_Start_button_up():
-	var error = get_tree().change_scene("res://World/Testworld.tscn")
+	var error = get_tree().change_scene("res://world/testworld.tscn")
 	print_debug('starting game status: ' + str(error))
 
 
