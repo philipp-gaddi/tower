@@ -12,18 +12,19 @@ func _ready():
 	pass
 
 
-func draw_corridor(start:Vector2, end:Vector2, half_thickness:int = 3):
+func draw_corridor(start:Vector2, end:Vector2, half_thickness:int = 3, only_on_free=false):
 	
 	var vector2_pool:PoolVector2Array = bresehnham_algorithmus(start, end)
 	
 	vector2_pool = thicken(vector2_pool, half_thickness)
 	
-	for v in vector2_pool:
-		set_cellv(v, 0)
-	
-	# udpate autotile region todo remove this, it's for testing
-#	update_bitmask_region(Vector2(-50,-50), Vector2(50,50))
-	
+	if only_on_free:
+		for v in vector2_pool:
+			if get_cellv(v) == INVALID_CELL:
+				set_cellv(v, 0)
+	else:
+		for v in vector2_pool:
+			set_cellv(v, 0)
 
 
 func draw_room(rect:Rect2):

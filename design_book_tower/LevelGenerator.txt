@@ -1,0 +1,19 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.6
+Creation-Date: 2021-04-18T16:23:04+02:00
+
+====== LevelGenerator ======
+Created Sonntag 18 April 2021
+
+Algos
+Prim Algorithm for MST
+
+
+
+
+Data Structure
+Graph
+
+
+
+

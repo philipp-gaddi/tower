@@ -1,0 +1,94 @@
+extends Node2D
+# based on youtube videos
+# https://www.youtube.com/watch?v=G2_SGhmdYFo&ab_channel=KidsCanCode
+# https://www.youtube.com/watch?v=U9B39sDIupc
+# 
+var room_scene = preload("res://world/anothergenerator/rooms/room.tscn")
+var tile_size = 32
+var num_rooms = 50
+var min_size = 4
+var max_size = 10
+var game_seed = 21061988
+var hspread = 400
+var cull = .5
+var path # Astar path finding object
+
+
+func _ready():
+	seed(game_seed)
+	make_rooms()
+
+func _process(delta):
+	
+	update()
+
+func _input(event):
+	if event.is_action_released("ui_accept"):
+		for c in $Rooms.get_children():
+			c.queue_free()
+		
+		make_rooms()
+
+func make_rooms():
+	
+	for i in range(num_rooms):
+		var pos = Vector2(rand_range(-hspread, hspread), 0)
+		var room = room_scene.instance()
+		var w = randi() % max_size + min_size
+		var h = randi() % max_size + min_size
+		room.make_room(pos, Vector2(w, h) * tile_size)
+		$Rooms.add_child(room)
+	
+	# wait for the movement to stop
+	yield(get_tree().create_timer(1.1), 'timeout')
+	
+	#cull rooms
+	var room_positions = []
+	for room in $Rooms.get_children():
+		if randf() < cull:
+			room.queue_free()
+		else:
+			room.mode = RigidBody2D.MODE_STATIC # no more processing?
+			room_positions.append(Vector3(room.position.x, room.position.y, 0.0))
+	
+	yield(get_tree(), "idle_frame")
+	
+	# generate MST
+	path = find_mst(room_positions)
+
+func find_mst(nodes:Array):
+	# Prims Algorithm
+	var _path = AStar.new()
+	_path.add_point(
+		_path.get_available_point_id(),
+		nodes.pop_front()
+	)
+	
+	# repeat until no more nodes remain
+	while nodes:
+		
+		var min_dist = INF
+		var min_position = null
+		var current_position = null 
+		
+		for p_index in _path.get_points():
+			var current_p = _path.get_point_position(p_index)
+			for p in nodes:
+				var distance = current_p.direction_to(p)
+				if distance < min_dist:
+					min_dist = distance
+					min_position = p
+					current_position = p_index
+		
+		var n = _path.get_available_point_id()
+		_path.add_point(n, min_position)
+		_path.connect_points(_path.get_closest_point(current_position), n)
+		nodes.erase(min_position)
+
+
+func _draw():
+	
+	for room in $Rooms.get_children():
+		var size = room.get_node('CollisionShape2D').shape.extents
+		var position = room.position
+		draw_rect(Rect2(position - size, size * 2), Color.red, false)

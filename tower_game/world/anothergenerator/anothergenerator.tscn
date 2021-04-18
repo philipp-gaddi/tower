@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://world/anothergenerator/anothergenerator.gd" type="Script" id=1]
+[ext_resource path="res://utils/testcam.tscn" type="PackedScene" id=2]
+
+[node name="Anothergenerator" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Rooms" type="Node2D" parent="."]
+
+[node name="TestCam" parent="." instance=ExtResource( 2 )]
+current = true
+zoom = Vector2( 10, 10 )
