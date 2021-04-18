@@ -2,7 +2,7 @@ extends Node2D
 # based on youtube videos
 # https://www.youtube.com/watch?v=G2_SGhmdYFo&ab_channel=KidsCanCode
 # https://www.youtube.com/watch?v=U9B39sDIupc
-# 
+# https://www.youtube.com/watch?v=o3fwlk1NI-w
 var room_scene = preload("res://world/anothergenerator/rooms/room.tscn")
 var tile_size = 32
 var num_rooms = 50
@@ -11,10 +11,12 @@ var max_size = 10
 var game_seed = 21061988
 var hspread = 400
 var cull = .5
-var path # Astar path finding object
+var path:AStar2D # Astar path finding object
 
 
 func _ready():
+	
+	
 	seed(game_seed)
 	make_rooms()
 
@@ -27,6 +29,7 @@ func _input(event):
 		for c in $Rooms.get_children():
 			c.queue_free()
 		
+		path.clear()
 		make_rooms()
 
 func make_rooms():
@@ -49,7 +52,7 @@ func make_rooms():
 			room.queue_free()
 		else:
 			room.mode = RigidBody2D.MODE_STATIC # no more processing?
-			room_positions.append(Vector3(room.position.x, room.position.y, 0.0))
+			room_positions.append(room.position)
 	
 	yield(get_tree(), "idle_frame")
 	
@@ -58,7 +61,7 @@ func make_rooms():
 
 func find_mst(nodes:Array):
 	# Prims Algorithm
-	var _path = AStar.new()
+	var _path = AStar2D.new()
 	_path.add_point(
 		_path.get_available_point_id(),
 		nodes.pop_front()
@@ -69,22 +72,23 @@ func find_mst(nodes:Array):
 		
 		var min_dist = INF
 		var min_position = null
-		var current_position = null 
+		var current_point = null 
 		
-		for p_index in _path.get_points():
-			var current_p = _path.get_point_position(p_index)
-			for p in nodes:
-				var distance = current_p.direction_to(p)
+		for point in _path.get_points():
+			var current_pos = _path.get_point_position(point)
+			for pos in nodes:
+				var distance = current_pos.distance_squared_to(pos)
 				if distance < min_dist:
 					min_dist = distance
-					min_position = p
-					current_position = p_index
+					min_position = pos
+					current_point = point
 		
 		var n = _path.get_available_point_id()
 		_path.add_point(n, min_position)
-		_path.connect_points(_path.get_closest_point(current_position), n)
+		_path.connect_points(current_point, n)
 		nodes.erase(min_position)
-
+	
+	return _path
 
 func _draw():
 	
@@ -92,3 +96,10 @@ func _draw():
 		var size = room.get_node('CollisionShape2D').shape.extents
 		var position = room.position
 		draw_rect(Rect2(position - size, size * 2), Color.red, false)
+	
+	if path:
+		for p in path.get_points():
+			var p_position = path.get_point_position(p)
+			for c in path.get_point_connections(p):
+				var c_position = path.get_point_position(c)
+				draw_line(p_position, c_position, Color.green)

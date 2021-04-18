@@ -88,7 +88,7 @@ func place_rooms2():
 			add_tiles_to_tileset(room.get_node("Tilemap").get_used_cells(), offset)
 		
 		var final_room = final_scenes_stack.pop_front()
-		var final_offset = coord_array[coord_array.size()-1]
+		var final_offset = coord_array[-1]
 		add_tiles_to_tileset(final_room.get_node("Tilemap").get_used_cells(),\
 							$Tilemap.world_to_map(final_offset))
 		
