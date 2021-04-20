@@ -20,6 +20,7 @@ func _ready():
 	seed(game_seed)
 	make_rooms()
 
+
 func _process(delta):
 	
 	update()
@@ -31,6 +32,8 @@ func _input(event):
 		
 		path.clear()
 		make_rooms()
+	if event.is_action_released("ui_focus_next"):
+		make_map()
 
 func make_rooms():
 	
@@ -59,6 +62,40 @@ func make_rooms():
 	# generate MST
 	path = find_mst(room_positions)
 
+func make_map():
+	# create tilemap from the generated rooms and maps
+	$TileMap.clear()
+	
+	# Fill Tilemap with walls, then carve empty rooms
+	var full_rect = Rect2()
+	var room_rect = null
+	var size = 0
+	for room in $Rooms.get_children():
+		size = room.get_node('CollisionShape2D').shape.extents
+		room_rect = Rect2(room.position - size, size * 2)
+		full_rect = full_rect.merge(room_rect)
+	var topleft = $TileMap.world_to_map(full_rect.position)
+	var bottomright = $TileMap.world_to_map(full_rect.end) + Vector2(1,1)
+	
+	for x in range(topleft.x, bottomright.x):
+		for y in range(topleft.y, bottomright.y):
+			$TileMap.set_cell(x, y, 0)
+	
+	# Carve rooms
+	var pos = null
+	var upper_left = null
+	var bottom_right = null
+	var corridors = []
+	for room in $Rooms.get_children():
+		size = (room.get_node("CollisionShape2D").shape.extents / tile_size).floor()
+		pos = $TileMap.world_to_map(room.position)
+		upper_left = (room.position / tile_size).floor() - size
+		for x in range(2, size.x * 2 -1):
+			for y in range(2, size.y * 2 -1):
+				$TileMap.set_cell(upper_left.x + x, upper_left.y + y, 1)
+
+
+
 func find_mst(nodes:Array):
 	# Prims Algorithm
 	var _path = AStar2D.new()
@@ -73,11 +110,13 @@ func find_mst(nodes:Array):
 		var min_dist = INF
 		var min_position = null
 		var current_point = null 
+		var current_pos = null
+		var distance = NAN
 		
 		for point in _path.get_points():
-			var current_pos = _path.get_point_position(point)
+			current_pos = _path.get_point_position(point)
 			for pos in nodes:
-				var distance = current_pos.distance_squared_to(pos)
+				distance = current_pos.distance_squared_to(pos)
 				if distance < min_dist:
 					min_dist = distance
 					min_position = pos
