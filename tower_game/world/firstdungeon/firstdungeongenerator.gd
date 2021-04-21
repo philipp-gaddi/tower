@@ -1,6 +1,6 @@
 extends Node2D
 
-var dungeon_room_center_coordinates
+
 onready var room1_scene = preload("res://world/firstdungeon/rooms/room1.tscn")
 onready var seal1_scene = preload("res://world/firstdungeon/rooms/seal1.tscn")
 onready var start_scene = preload("res://world/firstdungeon/rooms/startroom.tscn")
@@ -13,22 +13,19 @@ export(int, 100, 700) var distance_variation = 500
 export(int, 200, 500) var distance_min = 500
 export(int) var game_seed = 21061988
 
+var dungeon_room_center_coordinates = []
+var tile_map_region = Rect2()
 
 func _ready():
 	seed(game_seed)
 	
-	create_room_center_coordinates2()
-	
-	place_rooms2()
-	
-	make_corridors()
-	
-	$Tilemap.update_bitmask_region(Vector2(-200,-200), Vector2(200,200))
+	make_map()
 
 func reset():
 	for c in $Stuff.get_children():
 		c.queue_free()
 	$Tilemap.clear()
+	tile_map_region = Rect2()
 
 
 func create_room_center_coordinates2():
@@ -80,12 +77,13 @@ func place_rooms2():
 		final_scenes_stack.append(seal1_scene.instance())
 	final_scenes_stack.append(trade_scene.instance())
 	
-	var room = room1_scene.instance()
+#	var room = room1_scene.instance()
+	var room_tilemap = room1_scene.instance().get_node("Tilemap")
 	for coord_array in dungeon_room_center_coordinates:
 		
 		for i in range(coord_array.size()-1):
 			var offset = $Tilemap.world_to_map(coord_array[i])
-			add_tiles_to_tileset(room.get_node("Tilemap").get_used_cells(), offset)
+			add_tiles_to_tileset(room_tilemap.get_used_cells(), offset)
 		
 		var final_room = final_scenes_stack.pop_front()
 		var final_offset = coord_array[-1]
@@ -103,6 +101,7 @@ func make_corridors():
 	for coord_array in dungeon_room_center_coordinates:
 		var start_v = Vector2.ZERO
 		for coord in coord_array:
+			coord = $Tilemap.world_to_map(coord)
 			$Tilemap.draw_corridor(start_v, coord, 2.0, true)
 			start_v = coord
 
@@ -110,19 +109,21 @@ func add_tiles_to_tileset(tiles, offset=Vector2.ZERO):
 	for t in tiles:
 		$Tilemap.set_cellv(t + offset, 0)
 
+func make_map():
+	
+	reset()
+	create_room_center_coordinates2()
+	place_rooms2()
+	make_corridors()
+	tile_map_region = $Tilemap.get_used_rect()
+	$Tilemap.update_bitmask_region(tile_map_region.position, tile_map_region.end)
+	update()
 
 func _input(event):
 	if event.is_action_released("ui_accept"):
-		reset()
-		create_room_center_coordinates2()
-		place_rooms2()
-		make_corridors()
-		update()
+		make_map()
 
 func _draw():
-	
-	if dungeon_room_center_coordinates == null:
-		return
 	
 	for coord_array in dungeon_room_center_coordinates:
 		var start_coord = Vector2.ZERO

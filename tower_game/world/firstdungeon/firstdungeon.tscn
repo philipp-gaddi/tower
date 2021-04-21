@@ -12,6 +12,8 @@ intermedian_room_max_count = 4
 z_index = 1
 
 [node name="Tilemap" parent="." instance=ExtResource( 2 )]
+show_behind_parent = true
 
 [node name="TestCam" parent="." instance=ExtResource( 3 )]
 current = true
+zoom = Vector2( 5, 5 )

@@ -11,7 +11,7 @@ func _ready():
 #	draw_room(Rect2(Vector2(4,4), Vector2(7,7)))
 	pass
 
-
+# input map coordinates!
 func draw_corridor(start:Vector2, end:Vector2, half_thickness:int = 3, only_on_free=false):
 	
 	var vector2_pool:PoolVector2Array = bresehnham_algorithmus(start, end)
