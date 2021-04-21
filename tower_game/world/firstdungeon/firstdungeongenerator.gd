@@ -1,5 +1,7 @@
 extends Node2D
 
+# thoughts on improvement
+# list of scene candidates for rooms, starts, seals, trade
 
 onready var room1_scene = preload("res://world/firstdungeon/rooms/room1.tscn")
 onready var seal1_scene = preload("res://world/firstdungeon/rooms/seal1.tscn")
@@ -11,6 +13,7 @@ export(int, 1, 10) var seal_room_variation = 3
 export(int, 0, 10) var intermedian_room_max_count = 3
 export(int, 100, 700) var distance_variation = 500
 export(int, 200, 500) var distance_min = 500
+export(int, 1, 10) var corridor_width = 2
 export(int) var game_seed = 21061988
 
 var dungeon_room_center_coordinates = []
@@ -27,7 +30,6 @@ func reset():
 	$Tilemap.clear()
 	tile_map_region = Rect2()
 
-
 func create_room_center_coordinates2():
 	
 	var final_room_count = randi() % seal_room_variation + seal_room_min_count + 1
@@ -43,7 +45,6 @@ func create_room_center_coordinates2():
 	var radians = []
 	for w in weights:
 		radians.append(w/weight_sum * TAU)
-	
 	
 	for i in range(final_room_count):
 		
@@ -68,7 +69,6 @@ func create_room_center_coordinates2():
 
 func place_rooms2():
 	
-	
 	var start_room = start_scene.instance()
 	add_tiles_to_tileset(start_room.get_node("Tilemap").get_used_cells())
 	
@@ -90,7 +90,6 @@ func place_rooms2():
 		add_tiles_to_tileset(final_room.get_node("Tilemap").get_used_cells(),\
 							$Tilemap.world_to_map(final_offset))
 		
-		
 		for child in final_room.get_node('Stuff').get_children():
 			final_room.get_node('Stuff').remove_child(child)
 			child.position += final_offset
@@ -102,7 +101,7 @@ func make_corridors():
 		var start_v = Vector2.ZERO
 		for coord in coord_array:
 			coord = $Tilemap.world_to_map(coord)
-			$Tilemap.draw_corridor(start_v, coord, 2.0, true)
+			$Tilemap.draw_corridor(start_v, coord, corridor_width, true)
 			start_v = coord
 
 func add_tiles_to_tileset(tiles, offset=Vector2.ZERO):

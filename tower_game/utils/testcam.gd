@@ -2,11 +2,6 @@ extends Camera2D
 
 onready var direction=Vector2()
 
-func _process(_delta):
-	
-	self.position += direction * 30
-
-
 func _input(event):
 	
 	if event.is_action_pressed("ui_up"):
@@ -17,7 +12,11 @@ func _input(event):
 		direction = Vector2.LEFT
 	elif event.is_action_pressed("ui_right"):
 		direction = Vector2.RIGHT
+	elif event.is_action_pressed("ui_page_up"):
+		self.zoom -= Vector2(1,1)
+	elif event.is_action_pressed("ui_page_down"):
+		self.zoom += Vector2(1,1)
 	else:
 		direction = Vector2.ZERO
 	
-#	self.position += direction * 100
+	self.position += direction * 200

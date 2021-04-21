@@ -93,8 +93,40 @@ func make_map():
 		for x in range(2, size.x * 2 -1):
 			for y in range(2, size.y * 2 -1):
 				$TileMap.set_cell(upper_left.x + x, upper_left.y + y, 1)
+		
+		# Carve corridor
+		var p = path.get_closest_point(room.position)
+		var start
+		var end
+		for c in path.get_point_connections(p):
+			if not c in corridors:
+				start = $TileMap.world_to_map(path.get_point_position(p))
+				end = $TileMap.world_to_map(path.get_point_position(c))
+				carve_path(start, end)
+		corridors.append(p)
+	
+	
 
-
+func carve_path(start, end):
+	
+	var x_step = sign(end.x - start.x)
+	var y_step = sign(end.y - start.y)
+	
+	var y_vertical = start.y
+	var x_horizontal = end.x
+	
+	if randi() % 2 > 0:
+		y_vertical = end.y
+		x_horizontal = start.x
+	
+	for x in range(start.x, end.x, x_step):
+		$TileMap.set_cell(x, y_vertical + y_step, 1)
+		$TileMap.set_cell(x, y_vertical, 1)
+#		$TileMap.set_cell(x, y_vertical+1, 1)
+	for y in range(start.y, end.y, y_step):
+		$TileMap.set_cell(x_horizontal + x_step, y, 1)
+		$TileMap.set_cell(x_horizontal, y, 1)
+#		$TileMap.set_cell(x_horizontal+1, y, 1)
 
 func find_mst(nodes:Array):
 	# Prims Algorithm
