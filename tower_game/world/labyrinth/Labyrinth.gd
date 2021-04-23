@@ -4,6 +4,8 @@ var graph:Array
 export(int, 10, 1000) var width = 200
 export(int, 10, 1000) var height = 100
 
+
+
 func _ready():
 	
 	make_labyrinth()
