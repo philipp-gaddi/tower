@@ -30,9 +30,12 @@ func depth_first_randomizer():
 		var current_cell = stack.pop_front()
 		current_cell |= VISITED_BIT
 		
-		var unvisited_neighbours = choose_unvisited_neighbour(current_cell)
+		var unvisited_neighbour = choose_unvisited_neighbour(current_cell)
 		
-		pass
+		if unvisited_neighbour != null:
+			stack.push_front(current_cell)
+			
+			
 
 func choose_unvisited_neighbour(cell:Vector2):
 	
