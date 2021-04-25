@@ -12,9 +12,9 @@ func _input(event):
 		direction = Vector2.LEFT
 	elif event.is_action_pressed("ui_right"):
 		direction = Vector2.RIGHT
-	elif event.is_action_pressed("ui_page_up"):
+	elif Input.is_key_pressed(KEY_E):
 		self.zoom -= Vector2(1,1)
-	elif event.is_action_pressed("ui_page_down"):
+	elif Input.is_key_pressed(KEY_Q):
 		self.zoom += Vector2(1,1)
 	else:
 		direction = Vector2.ZERO

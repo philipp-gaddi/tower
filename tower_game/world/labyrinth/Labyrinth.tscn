@@ -1,9 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://world/labyrinth/Labyrinth.gd" type="Script" id=1]
 [ext_resource path="res://world/firstdungeon/tilemap/Tilemap.tscn" type="PackedScene" id=2]
+[ext_resource path="res://utils/testcam.tscn" type="PackedScene" id=3]
 
 [node name="Labyrinth" type="Node2D"]
 script = ExtResource( 1 )
+width = 10
+height = 10
+cell_distance = 6
+door_offset = 1
 
 [node name="Tilemap" parent="." instance=ExtResource( 2 )]
+
+[node name="TestCam" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1349.05, 1438.47 )
+current = true
+zoom = Vector2( 3, 3 )
