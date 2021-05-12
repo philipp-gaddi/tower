@@ -6,17 +6,17 @@ Creation-Date: 2021-03-29T13:51:47+02:00
 Created Montag 29 März 2021
 
 components
-* life
-* exp
-* money
-* skills
-* inventory
-* attributes/character sheet
-* background music
-* level
-* character
-* enemies
-* seals
-	* enemy summoning
-* portal
-* redeemer
+* ~~life~~
+* ~~exp~~
+* ~~money~~
+* ~~skills~~
+* ~~inventory~~
+* ~~attributes/character sheet~~
+* ~~background music~~
+* ~~level~~
+* ~~character~~
+* ~~enemies~~
+* ~~seals~~
+	* ~~enemy summoning~~
+* ~~portal~~
+* ~~redeemer~~
